@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Slider from "react-native-sliders";
-import { useState } from 'react';
+// import { useState } from 'react';
 
-export default function RadiusSelector({styles}) {
+export default function RadiusSelector({styles, radius, setRadius}) {
 
-  const [radius, setRadius] = useState(1);
+  // const [radius, setRadius] = useState(1);
 
   const handleSliderChange = (value) => {
     setRadius(value);

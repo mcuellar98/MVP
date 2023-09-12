@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View, TextInput } from 'react-native';
-import { useState } from 'react';
+// import { useState } from 'react';
 
-export default function StyleSelector({styles}) {
+export default function StyleSelector({styles, setTerms}) {
 
-  const [terms, setTerms] = useState('')
+  // const [terms, setTerms] = useState('')
 
   const termChange = (e) => {
     setTerms(e.target.value);

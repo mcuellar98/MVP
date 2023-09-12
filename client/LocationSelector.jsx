@@ -1,16 +1,16 @@
 import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
-import axios from 'axios';
+// import axios from 'axios';
 import { SelectList } from 'react-native-dropdown-select-list'
-import {useState} from 'react';
+// import {useState} from 'react';
 import {stateData} from './StatesData';
 
-export default function LocationSelector({styles}) {
+export default function LocationSelector({styles , setCity, setZip, setState, setAddress}) {
 
   // const [selected, setSelected] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [zip, setZip] = useState('');
-  const [state, setState] = useState('');
+  // const [address, setAddress] = useState('');
+  // const [city, setCity] = useState('');
+  // const [zip, setZip] = useState('');
+  // const [state, setState] = useState('');
   const data = stateData;
 
   const cityChange = (e) => {
