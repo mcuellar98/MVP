@@ -1,24 +1,19 @@
-import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
-// import axios from 'axios';
+import { StyleSheet, Text, View, Button, TextInput, Switch} from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list'
-// import {useState} from 'react';
 import {stateData} from './StatesData';
+import { useState } from 'react';
 
 export default function LocationSelector({styles , setCity, setZip, setState, setAddress}) {
 
-  // const [selected, setSelected] = useState('');
-  // const [address, setAddress] = useState('');
-  // const [city, setCity] = useState('');
-  // const [zip, setZip] = useState('');
-  // const [state, setState] = useState('');
+  const [useLocation, setUseLocation] = useState(false);
   const data = stateData;
 
   const cityChange = (e) => {
     setCity(e.target.value);
   }
 
-  const zipChange = (e) => {
-    setZip(e.target.value);
+  const zipChange = (value) => {
+    setZip(value);
   }
 
   const addressChange = (e) => {
@@ -31,28 +26,39 @@ export default function LocationSelector({styles , setCity, setZip, setState, se
 
   return (
     <View style={styles.locationSelector}>
-      <Button
+      {/* <Button
       // onPress={onPressLearnMore}
       title="Use My Location"
-      color="#841584"
       accessibilityLabel="Use My Location"
-      />
-      <TextInput
-        placeholder='City'
-        onChange={cityChange}
-      />
-      <TextInput
+      /> */}
+      <View style={styles.locPermission}>
+        <Text style={{padding: 10, fontSize: 18}}>Use My Location</Text>
+        <Switch
+          style={{justifyContent: 'center',alignItems: 'center'}}
+          value={useLocation}
+          onValueChange={(value) => setUseLocation(value)}
+        />
+      </View>
+      <TextInput style={styles.textInput}
         placeholder='Address'
-        onChange={addressChange}
+        onChangeText={value => addressChange(value)}
       />
-       <SelectList
+      <TextInput style={styles.textInput}
+        placeholder='City'
+        onChangeText={value => cityChange(value)}
+      />
+      <TextInput style={styles.textInput}
+        placeholder='State'
+        onChangeText={value => stateChange(value)}
+      />
+       {/* <SelectList style={{backgroundColor: 'red'}}
         setSelected={(val) => stateChange(val)}
         data={data}
         save="value"
-      />
-      <TextInput
+      /> */}
+      <TextInput style={styles.textInput}
         placeholder='Zip Code'
-        onChange={zipChange}
+        onChangeText={value => zipChange(value)}
       />
     </View>
   );

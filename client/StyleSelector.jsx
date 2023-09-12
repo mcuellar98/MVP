@@ -5,15 +5,15 @@ export default function StyleSelector({styles, setTerms}) {
 
   // const [terms, setTerms] = useState('')
 
-  const termChange = (e) => {
-    setTerms(e.target.value);
+  const termChange = (value) => {
+    setTerms(value);
   }
 
   return (
     <View style={styles.styleSelector}>
-      <TextInput
+      <TextInput style={styles.textInput}
         placeholder="What are you looking for (bar, restaurant, bakery, etc)"
-        onChange={termChange}
+        onChangeText={value => termChange(value)}
       />
     </View>
   );

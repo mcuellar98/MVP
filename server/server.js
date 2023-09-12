@@ -1,19 +1,30 @@
 const express = require('express');
-var compression = require('express-compression')
+const compression = require('express-compression')
+const cors = require('cors');
+require('dotenv').config();
+const axios = require('axios');
 
 const app = express();
 
 app.use(compression());
-app.use((req, res, next) => {
-  if (!req.headers.authorization) {
-    req.headers.authorization = process.env.TOKEN;
-    req.headers['Accept'] = 'application/json';
-  }
-  next();
-});
+app.use(express.json());
+app.use(cors());
 
-app.get('http://47.230.192.119:3000/results', (req, res) => {
-  console.log('hello');
+app.post('/', (req, res) => {
+  // console.log(req.body);
+  const config = {
+    headers:{Authorization: process.env.TOKEN, accept: 'application/json'},
+    params: req.body
+  }
+  axios.get('https://api.yelp.com/v3/businesses/search',  config)
+  .then((response) => {
+    // console.log(Object.keys(response.data));
+    res.json(response.data.businesses);
+  })
+  .catch((err) => {
+    console.log(err);
+    res.sendStatus(500);
+  })
 })
 
 app.listen(3000, () => {
