@@ -8,6 +8,7 @@ export default function ResultList({route}) {
   var results = route.params.results;
   var stringLength = 0;
   var rowCol = 'row'
+  results = _.sortBy(results, 'distance')
 
 
   return (
