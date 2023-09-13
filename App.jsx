@@ -8,7 +8,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { Icon } from 'react-native-elements'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Surprise from './client/Surprise.jsx';
+import SurpriseScreen from './client/SurpriseScreen.jsx';
 
 const Tab = createMaterialBottomTabNavigator();
 // const Tab = createBottomTabNavigator();
@@ -39,7 +39,7 @@ export default function App() {
         />
       <Tab.Screen
           name="Settings"
-          component={Surprise}
+          component={SurpriseScreen}
           options={{
             tabBarLabel: 'Settings',
             tabBarIcon: ({ color }) => (
