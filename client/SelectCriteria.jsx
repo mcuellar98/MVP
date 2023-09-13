@@ -36,14 +36,6 @@ export default function SelectCriteria({route, navigation}) {
     }
   },[results])
 
-  // useEffect(() => {
-  //   if (results.length > 0) {
-  //     navigation.navigate('OneResult', {
-  //       results: results
-  //     })
-  //   }
-  // },[results])
-
   const handleSubmit = () => {
     var reqBody;
     var location = address+' '+city+' '+state+' '+zip;
@@ -108,7 +100,6 @@ export default function SelectCriteria({route, navigation}) {
           accessibilityLabel="Submit"
         />
       </View>
-      {/* <ResultList styles={styles} results={results} resultLimit={resultLimit}/> */}
     </ScrollView>
   );
 }
@@ -136,7 +127,8 @@ const styles = StyleSheet.create({
   },
   priceOption: {
     flexDirection: 'col',
-    alignItems: 'center'
+    alignItems: 'center',
+
   },
   priceContainer: {
     marginBottom: 20,
@@ -152,7 +144,8 @@ const styles = StyleSheet.create({
     borderColor: '#D0D0D0',
     borderRadius: 15,
     padding: 15,
-    fontSize: 16
+    fontSize: 16,
+    backgroundColor: 'white'
   },
   stateInput: {
     width: '100px',
@@ -174,8 +167,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF8464'
   },
   homeFooter: {
-    // position: 'absolute',
-    // bottom: 0,
     height: 80,
     backgroundColor: '#FF8464'
   }

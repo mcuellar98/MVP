@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Slider from "react-native-sliders";
-// import { useState } from 'react';
 
 export default function RadiusSelector({styles, radius, setRadius}) {
 
@@ -13,7 +12,7 @@ export default function RadiusSelector({styles, radius, setRadius}) {
   return (
     <View style={styles.radiusSelector}>
       <Text style={{fontSize: 18, marginBottom: 20}}>
-        Radius: {radius} Miles
+        Radius: {radius} Mile(s)
       </Text>
       <Slider
           value={radius}

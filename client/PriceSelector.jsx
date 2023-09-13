@@ -15,6 +15,7 @@ export default function PriceSelector({styles, prices, setPrices}) {
       <View style={styles.priceSelector}>
         <View style={styles.priceOption}>
           <RadioButton
+            backgroundColor='white'
             borderWidth='1'
             value="$"
             status={ prices.includes('$') ? 'checked' : 'unchecked' }
@@ -25,6 +26,7 @@ export default function PriceSelector({styles, prices, setPrices}) {
         </View>
         <View style={styles.priceOption}>
           <RadioButton
+            backgroundColor='white'
             borderWidth='1'
             value="$$"
             status={ prices.includes('$$') ? 'checked' : 'unchecked' }
@@ -35,6 +37,7 @@ export default function PriceSelector({styles, prices, setPrices}) {
         </View>
         <View style={styles.priceOption}>
           <RadioButton
+            backgroundColor='white'
             borderWidth='1'
             value="$$$"
             status={ prices.includes('$$$') ? 'checked' : 'unchecked' }
@@ -45,6 +48,7 @@ export default function PriceSelector({styles, prices, setPrices}) {
          </View>
          <View style={styles.priceOption}>
           <RadioButton
+            backgroundColor='white'
             borderWidth='1'
             value="$$$$"
             status={ prices.includes('$$$$') ? 'checked' : 'unchecked' }
