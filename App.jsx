@@ -1,64 +1,46 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, ScrollView, SafeAreaView } from 'react-native';
 import SelectCriteria from './client/SelectCriteria.jsx';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import HomeScreen from './client/HomeScreen.jsx';
+import { useFonts, FredokaOne_400Regular } from '@expo-google-fonts/fredoka-one';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { Icon } from 'react-native-elements'
+
+const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    FredokaOne_400Regular,
+  });
   return (
-
-    <View style={styles.appContainer}>
-      <SelectCriteria styles={styles}/>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator
+      // initialRouteName="Home"
+      // screenOptions={{
+        // activeTintColor: 'green',
+        // tabBarStyle: {
+          // backgroundColor: '#b3b3b3',
+          // borderTopColor: 'transparent'
+      //   }
+      // }}
+        >
+      <Tab.Screen
+          name="Home Tab"
+          component={HomeScreen}
+          options={{
+            tabBarLabel: 'Home',
+            backgroundColor: 'white'
+            // tabBarIcon: ({ color, size }) => (
+            //   <MaterialCommunityIcons name="home" color={color} size={size} />
+            // ),
+          }}
+        />
+        {/* <Tab.Screen name="Settings" component={SettingsScreen} /> */}
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  appContainer: {
-    flex: 1,
-    backgroundColor: '#fff',
 
-    // width: '50%',
-    alignItems: 'center'
-  },
-  selectionContainer: {
-    flexDirection: 'col',
-    // height: '30%',
-    justifyContent: 'space-between',
-    // borderWidth: 1,
-    // borderColor: 'black'
-  },
-  styleSelector: {
-    // borderWidth: 1,
-    // borderColor: 'black'
-  },
-  priceSelector: {
-    // borderWidth: 1,
-    // borderColor: 'black'
-  },
-  radiusSelector: {
-    // borderWidth: 1,
-    // borderColor: 'black'
-  },
-  locationSelector: {
-    // borderWidth: 1,
-    // borderColor: 'black'
-  },
-  textInput: {
-    marginBottom: '3%',
-    borderWidth: 1,
-    borderColor: '#EEEEEE',
-    borderRadius: 15,
-    padding: 15,
-    fontSize: 16
-  },
-  stateInput: {
-    width: '100px',
-    marginBottom:'3%'
-  },
-  locPermission: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: '3%',
-    marginTop: '3%'
-  }
-});

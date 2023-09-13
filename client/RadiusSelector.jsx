@@ -12,17 +12,19 @@ export default function RadiusSelector({styles, radius, setRadius}) {
 
   return (
     <View style={styles.radiusSelector}>
-      <Text>choose radius</Text>
+      <Text style={{fontSize: 18, marginBottom: 20}}>
+        Radius: {radius} Miles
+      </Text>
       <Slider
           value={radius}
           onValueChange={(value) => handleSliderChange(value)}
           minimumValue={1}
           maximumValue={5}
           step={1}
+          thumbStyle={{width: 40, height: 40, borderRadius: 40}}
+          maximumTrackStyle={{height: 15, borderRadius: 10}}
+          minimumTrackStyle={{height: 15, borderRadius: 10}}
         />
-        <Text>
-          Radius: {radius} miles
-        </Text>
     </View>
   );
 }

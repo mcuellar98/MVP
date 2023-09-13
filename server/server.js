@@ -12,6 +12,7 @@ app.use(cors());
 
 app.post('/', (req, res) => {
   // console.log(req.body);
+  // console.log('received');
   const config = {
     headers:{Authorization: process.env.TOKEN, accept: 'application/json'},
     params: req.body

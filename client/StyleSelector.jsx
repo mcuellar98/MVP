@@ -10,9 +10,9 @@ export default function StyleSelector({styles, setTerms}) {
   }
 
   return (
-    <View style={styles.styleSelector}>
+    <View  style={styles.styleSelector}>
       <TextInput style={styles.textInput}
-        placeholder="What are you looking for (bar, restaurant, bakery, etc)"
+        placeholder="What are you looking for?"
         onChangeText={value => termChange(value)}
       />
     </View>

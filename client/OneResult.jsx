@@ -1,14 +1,13 @@
 import { StyleSheet, Text, View, FlatList, ScrollView} from 'react-native';
 import _ from 'underscore';
 
-
-export default function ResultList({route}) {
+export default function OneResult({route}) {
 
   var results = route.params.results;
 
   return (
     <ScrollView>
-      {results.slice(0, 10).map((result) => (
+      {results.slice(0, 1).map((result) => (
         <View key={result.id} style={styles.resultEntry}>
           <Text style={{fontSize: 18, alignItems:'center', justifyContent:'center'}}>{result.name}</Text>
           <View style={styles.resultDetails}>
