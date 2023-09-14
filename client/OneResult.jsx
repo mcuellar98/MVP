@@ -1,31 +1,68 @@
 import { StyleSheet, Text, View, FlatList, ScrollView} from 'react-native';
 import _ from 'underscore';
+import {useEffect, useState} from 'react';
+import ResultInfo from './ResultInfo.jsx';
+import ResultMap from './ResultMap.jsx';
 
 export default function OneResult({route}) {
 
-  var results = route.params.results;
-  var index = Math.floor(Math.random() * results.length);
-  var result = results[index];
+  const [reviews, setReviews] = useState([]);
+  const results = route.params.results;
+  const index = Math.floor(Math.random() * results.length);
+  const result = results[index];
+  const latitude = result.coordinates.latitude;
+  const longitude = result.coordinates.longitude;
+
+  // useEffect(() => {
+  //   // console.log(result)
+  //   fetch('http://localhost:3000/images', {
+  //     headers: {
+  //       'Content-Type': "application/json",
+  //     },
+  //     method: 'post',
+  //     body: JSON.stringify({url: result.url})
+  //   })
+  // }, [])
+
+  useEffect(() => {
+    fetch('http://localhost:3000/reviews', {
+      headers: {
+        'Content-Type': "application/json",
+      },
+      method: 'post',
+      body: JSON.stringify({id: result.id})
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      // console.log(response)
+      setReviews(response)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }, [])
 
   return (
     <View style={styles.resultList}>
-        <View key={result.id} style={styles.resultEntry}>
-          <Text style={{fontSize: 18, alignItems:'center', justifyContent:'center'}}>{result.name}</Text>
-          <View style={styles.resultDetails}>
-            <Text style={{fontSize: 14, }}>
-              {_.reduce(result.categories, (memo, category, index) => {
-                index === 0 ? stringLength = 0 : null;
-                stringLength += (category.title.length + 1);
-                return index < result.categories.length-1  ? memo += category.title +'/' : memo += category.title
-              }, '')}</Text>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={{fontSize: 14}}> {result.rating}★</Text>
-              <Text style={{fontSize: 14}}> | {Math.round(result.distance)} meters</Text>
-           </View>
+      <View key={result.id} style={styles.resultEntry}>
+        <Text style={{fontSize: 18, alignItems:'center', justifyContent:'center'}}>{result.name}</Text>
+        <View style={styles.resultDetails}>
+          <Text style={{fontSize: 14, }}>
+            {_.reduce(result.categories, (memo, category, index) => {
+              index === 0 ? stringLength = 0 : null;
+              stringLength += (category.title.length + 1);
+              return index < result.categories.length-1  ? memo += category.title +'/' : memo += category.title
+            }, '')}</Text>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={{fontSize: 14, paddingTop: 3}}> {result.rating} ★</Text>
+            <Text style={{fontSize: 14, paddingTop: 3}}> | {Math.round(result.distance)} meters</Text>
           </View>
         </View>
-        <View style={styles.extraInfo}>
-        </View>
+      </View>
+      <ResultMap latitude={latitude} longitude={longitude}/>
+      <ResultInfo reviews={reviews}/>
     </View>
   )
 };
@@ -50,11 +87,5 @@ const styles = StyleSheet.create({
   },
   resultList: {
     padding:15
-  },
-  extraInfo: {
-    borderWidth: 1,
-    height: 400,
-    borderRadius: 20
-    // height: 200
   }
 });

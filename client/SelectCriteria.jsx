@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, SafeAreaView, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, Pressable, SafeAreaView, ScrollView} from 'react-native';
 import StyleSelector from './StyleSelector';
 import PriceSelector from './PriceSelector';
 import RadiusSelector from './RadiusSelector';
@@ -62,12 +62,13 @@ export default function SelectCriteria({route, navigation}) {
       },
       method: 'post',
       body: JSON.stringify(reqBody)
-  })
+    })
     .then((response) => {
       return response.json()
     })
     .then((response) => {
-      return setResults(response);
+      // console.log(response);
+      setResults(response);
     })
     .catch((err) => {
       console.log(err);
@@ -81,24 +82,26 @@ export default function SelectCriteria({route, navigation}) {
       <PriceSelector styles={styles} prices={prices} setPrices={setPrices}/>
       <RadiusSelector styles={styles} radius={radius} setRadius={setRadius}/>
       <View style={styles.buttonContainer}>
-        <Button
+        <Pressable
+          style={styles.button}
           onPress={() => {
             setResultLimit(1);
             feelingLucky.current = true;
             handleSubmit();
           }}
-          title="I'm Feeling Lucky"
-          accessibilityLabel="I'm Feeling Lucky"
-        />
-        <Button
+        >
+           <Text>Give Me Some Options</Text>
+        </Pressable>
+        <Pressable
+          style={styles.button}
           onPress={() => {
             setResultLimit(10);
             feelingLucky.current = false;
             handleSubmit();
           }}
-          title="Submit"
-          accessibilityLabel="Submit"
-        />
+        >
+          <Text>I'm Feeling Lucky</Text>
+        </Pressable>
       </View>
     </ScrollView>
   );
@@ -160,7 +163,16 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginBottom: 30,
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+  },
+  button: {
+    borderWidth: 1,
+    width: 170,
+    height: 50,
+    backgroundColor: 'white',
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   homeHeader: {
     height: 80,

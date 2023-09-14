@@ -24,8 +24,8 @@ export default function ResultList({route}) {
                 return index < result.categories.length-1  ? memo += category.title +'/' : memo += category.title
               }, '')}</Text>
             <View style={{flexDirection: 'row'}}>
-              <Text style={{fontSize: 14}}> {result.rating}★</Text>
-              <Text style={{fontSize: 14}}> | {Math.round(result.distance)} meters</Text>
+              <Text style={{fontSize: 14, paddingTop: 3}}> {result.rating}★</Text>
+              <Text style={{fontSize: 14, paddingTop: 3}}> | {Math.round(result.distance)} meters</Text>
            </View>
           </View>
         </View>

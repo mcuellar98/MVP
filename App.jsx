@@ -16,7 +16,7 @@ const Tab = createMaterialBottomTabNavigator();
 export default function App() {
   const navTheme = {
     colors: {
-      background: "#fad8cf"
+      background: "#E0E0E0"
     }
   };
 

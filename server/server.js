@@ -3,6 +3,7 @@ const compression = require('express-compression')
 const cors = require('cors');
 require('dotenv').config();
 const axios = require('axios');
+const x = require('x-ray-scraper');
 
 const app = express();
 
@@ -11,8 +12,6 @@ app.use(express.json());
 app.use(cors());
 
 app.post('/', (req, res) => {
-  // console.log(req.body);
-  // console.log('received');
   const config = {
     headers:{Authorization: process.env.TOKEN, accept: 'application/json'},
     params: req.body
@@ -24,6 +23,26 @@ app.post('/', (req, res) => {
   })
   .catch((err) => {
     console.log(err);
+    res.sendStatus(500);
+  })
+})
+
+app.post('/images', (req, res) => {
+  x('http://google.com', '.title')
+  .then((title) => {
+    console.log(title); // Google
+  })
+})
+
+app.post('/reviews', (req, res) => {
+  const config = {
+    headers:{Authorization: process.env.TOKEN, accept: 'application/json'}
+  }
+  axios.get(`https://api.yelp.com/v3/businesses/${req.body.id}/reviews`, config)
+  .then((response) => {
+    res.json(response.data.reviews);
+  })
+  .catch((err) => {
     res.sendStatus(500);
   })
 })
