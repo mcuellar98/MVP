@@ -4,6 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 const axios = require('axios');
 const x = require('x-ray-scraper');
+var osmosis = require('osmosis');
 
 const app = express();
 
@@ -13,12 +14,11 @@ app.use(cors());
 
 app.post('/', (req, res) => {
   const config = {
-    headers:{Authorization: process.env.TOKEN, accept: 'application/json'},
+    headers: {Authorization: process.env.TOKEN, accept: 'application/json'},
     params: req.body
   }
   axios.get('https://api.yelp.com/v3/businesses/search',  config)
   .then((response) => {
-    // console.log(Object.keys(response.data));
     res.json(response.data.businesses);
   })
   .catch((err) => {
@@ -28,11 +28,8 @@ app.post('/', (req, res) => {
 })
 
 app.post('/images', (req, res) => {
-  x('http://google.com', '.title')
-  .then((title) => {
-    console.log(title); // Google
-  })
-})
+
+});
 
 app.post('/reviews', (req, res) => {
   const config = {

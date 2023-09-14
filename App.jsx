@@ -6,17 +6,15 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './client/HomeScreen.jsx';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Icon } from 'react-native-elements'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SurpriseScreen from './client/SurpriseScreen.jsx';
 
 const Tab = createMaterialBottomTabNavigator();
-// const Tab = createBottomTabNavigator();
 
 export default function App() {
   const navTheme = {
     colors: {
-      background: "#E0E0E0"
+      background: "white"
     }
   };
 
@@ -25,13 +23,15 @@ export default function App() {
       <Tab.Navigator
       barStyle={{ backgroundColor: '#FF8464' }}
       activeColor="black"
-      inactiveColor="#3e2465"
+      inactiveColor="black"
+
       >
       <Tab.Screen
           name="Home Tab"
           component={HomeScreen}
           options={{
             tabBarLabel: 'Home',
+            // barTintColor: 'white',
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="home" color={color} size={26} />
             )

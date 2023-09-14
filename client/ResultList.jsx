@@ -1,20 +1,23 @@
-import { StyleSheet, Text, View, FlatList, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, FlatList, ScrollView, Pressable} from 'react-native';
 import _ from 'underscore';
 import { useRef, useEffect } from 'react';
 
 
-export default function ResultList({route}) {
+export default function ResultList({route, navigation}) {
 
   var results = route.params.results;
   var stringLength = 0;
   var rowCol = 'row'
   results = _.sortBy(results, 'distance')
 
+  const handlePress = () => {
+    navigation.navigate('OneResult')
+  }
 
   return (
     <ScrollView style={styles.resultList}>
       {results.slice(0, 10).map((result) => (
-        <View key={result.id} style={styles.resultEntry}>
+        <Pressable key={result.id} style={styles.resultEntry} onPress={handlePress}>
           <Text style={{fontSize: 18, alignItems:'center', justifyContent:'center'}}>{result.name}</Text>
           <View style={styles.resultDetails}>
             <Text style={{fontSize: 14, }}>
@@ -25,10 +28,10 @@ export default function ResultList({route}) {
               }, '')}</Text>
             <View style={{flexDirection: 'row'}}>
               <Text style={{fontSize: 14, paddingTop: 3}}> {result.rating}★</Text>
-              <Text style={{fontSize: 14, paddingTop: 3}}> | {Math.round(result.distance)} meters</Text>
+              <Text style={{fontSize: 14, paddingTop: 3}}> | {Math.round(result.distance * 0.0621371)/100} miles</Text>
            </View>
           </View>
-        </View>
+        </Pressable>
       ))}
     </ScrollView>
   )

@@ -1,16 +1,20 @@
 import { StyleSheet, Text, View, FlatList, ScrollView} from 'react-native';
 import _ from 'underscore';
 import { useState } from 'react';
+import moment from 'moment';
 
 export default function ResultInfo({reviews}) {
 
   return (
     <View style={styles.extraInfo}>
-      <Text style={{marginBottom: 20}}t>Recent Reviews</Text>
+      <Text style={{}}t>Recent Reviews</Text>
       <View>
         {reviews.slice(0,2).map((review) => {
         return (
-            <Text style={{marginBottom: 20}}>{review.rating}★: {review.text}</Text>
+          <View>
+            <Text style={{paddingTop: 20, paddingBottom: 10}}>{review.rating}★: {review.text}</Text>
+            <Text style={{paddingTop: 5, paddingBottom: 10}}>{review.user.name} | {moment(review.time_created).fromNow()}</Text>
+          </View>
         )
         })}
       </View>

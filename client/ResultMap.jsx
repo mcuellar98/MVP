@@ -1,24 +1,45 @@
 import { StyleSheet, Text, View, FlatList, ScrollView} from 'react-native';
 import _ from 'underscore';
-import { useState } from 'react';
-import MapView from 'react-native-maps';
+import { useState, useEffect } from 'react';
+import MapView, { AnimatedRegion, Animated } from 'react-native-maps';
 import { Marker } from "react-native-maps";
 
 export default function ResultMap({reviews, latitude, longitude}) {
 
-  const region = {
-    latitude: latitude,
-    longitude: longitude,
-    latitudeDelta: 0.03,
-    longitudeDelta: 0.03,
-  }
+  const [region, setRegion] = useState({
+      latitude: latitude,
+      longitude: longitude,
+      latitudeDelta: 0.03,
+      longitudeDelta: 0.03
+  })
+
+  const handleRegionChange = () => {
+    setRegion({
+        latitude: latitude,
+        longitude: longitude,
+        latitudeDelta: 0.03,
+        longitudeDelta: 0.03
+    })
+  };
+
+  useEffect(() => {
+    setRegion(
+      {
+        latitude: latitude,
+        longitude: longitude,
+        latitudeDelta: 0.03,
+        longitudeDelta: 0.03,
+      }
+    )
+  }, [latitude])
 
   return (
       <MapView
       style={styles.mapContainer}
-      initialRegion={region}
+      region={region}
+      onRegionChange={handleRegionChange}
       >
-      <Marker coordinate={region} />
+        <Marker coordinate={region} />
       </MapView>
     )
   }

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable, SafeAreaView, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, Pressable, SafeAreaView, ScrollView, Alert} from 'react-native';
 import StyleSelector from './StyleSelector';
 import PriceSelector from './PriceSelector';
 import RadiusSelector from './RadiusSelector';
@@ -42,8 +42,8 @@ export default function SelectCriteria({route, navigation}) {
     {location.length > 3 ?
       reqBody = {
         location: location,
-        term: terms,
-        radius: parseInt(radius[0])*1000,
+        categories: terms,
+        radius: parseInt(radius[0])*1600,
         price: prices.map((string) => string.length).join(','),
         open_now: true
         } :
@@ -67,11 +67,11 @@ export default function SelectCriteria({route, navigation}) {
       return response.json()
     })
     .then((response) => {
-      // console.log(response);
       setResults(response);
     })
     .catch((err) => {
-      console.log(err);
+      Alert.alert('Please Fill Required Fields');
+      // console.log(err);
     })
   }
 
@@ -85,22 +85,22 @@ export default function SelectCriteria({route, navigation}) {
         <Pressable
           style={styles.button}
           onPress={() => {
-            setResultLimit(1);
+            // setResultLimit(1);
             feelingLucky.current = true;
             handleSubmit();
           }}
         >
-           <Text>Give Me Some Options</Text>
+           <Text>I'm Feeling Lucky</Text>
         </Pressable>
         <Pressable
           style={styles.button}
           onPress={() => {
-            setResultLimit(10);
+            // setResultLimit(10);
             feelingLucky.current = false;
             handleSubmit();
           }}
         >
-          <Text>I'm Feeling Lucky</Text>
+          <Text>Give Me Some Options</Text>
         </Pressable>
       </View>
     </ScrollView>
